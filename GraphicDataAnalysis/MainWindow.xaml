@@ -4,9 +4,142 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicDataAnalysis"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+            </Grid.ColumnDefinitions>
+                          
+            <!--饼状图-->
+            <lvc:PieChart Background="LightGray" Grid.Column="0" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Loaded="PieChartLoad">
+                <lvc:PieChart.Series>
+                    <lvc:PieSeries Title="Maria" Values="3" DataLabels="True"
+                               LabelPoint="{Binding PointLabel}"/>
+                    <lvc:PieSeries Title="Charles" Values="4" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                    <lvc:PieSeries Title="Frida" Values="6" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                    <lvc:PieSeries Title="Frederic" Values="2" DataLabels="True" 
+                               LabelPoint="{Binding PointLabel}"/>
+                </lvc:PieChart.Series>
+            </lvc:PieChart>
+
+            <!--横列条形图-->
+            <lvc:CartesianChart Background="LightGray" Grid.Column="2" Series="{Binding BasicRowSeriesCollection}" LegendLocation="Bottom">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Salesman" LabelFormatter="{Binding BasicRowFormatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Sold Apps" Labels="{Binding BasicRowLabels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.DataTooltip>
+                    <lvc:DefaultTooltip SelectionMode="SharedYValues"></lvc:DefaultTooltip>
+                </lvc:CartesianChart.DataTooltip>
+            </lvc:CartesianChart>
+
+            <lvc:CartesianChart Grid.Column="3">
+                <lvc:CartesianChart.Series>
+                    <lvc:ScatterSeries Title="Series A" Values="{Binding BubbleValuesA}" />
+                    <lvc:ScatterSeries Title="Series B" Values="{Binding BubbleValuesB}"
+                                   PointGeometry="{x:Static lvc:DefaultGeometries.Diamond}" />
+                    <lvc:ScatterSeries Title="Series C" Values="{Binding BubbleValuesC}"
+                                   PointGeometry="{x:Static lvc:DefaultGeometries.Triangle}"
+                                   StrokeThickness="2" Fill="Transparent"/>
+                </lvc:CartesianChart.Series>
+                <lvc:CartesianChart.AxisY>
+                    <!--setting the axis unit improved the labels rounding rule-->
+                    <lvc:Axis Unit="1"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+            <GridSplitter Grid.Column="0" Width="2" Background="Black"></GridSplitter>
+            <GridSplitter Grid.Column="1" Width="2" Background="Black"></GridSplitter>
+            <GridSplitter Grid.Column="2" Width="2" Background="Black"></GridSplitter>
+            <GridSplitter Grid.Column="3" Width="2" Background="Black"></GridSplitter>
+
+        </Grid>
         
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300*"/>
+                <ColumnDefinition Width="100*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100*"/>
+                    <RowDefinition Height="100*"/>
+                </Grid.RowDefinitions>
+                
+                <!--多条折线图-->
+                <lvc:CartesianChart Grid.Row="1" Series="{Binding MultBasicLineSeriesCollection}" >
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Sales" LabelFormatter="{Binding MultBasicLineYFormatter}"></lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Month" Labels="{Binding MultBasicLineLabels}"></lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
+            </Grid>
+            <GridSplitter Grid.Column="0" Width="2" Background="Black"></GridSplitter>
+            <GridSplitter Grid.Column="1" Width="2" Background="Black"></GridSplitter>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--堆叠图-->
+            <lvc:CartesianChart Grid.Column="0" Series="{Binding StackedAreaSeriesCollection}" >
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Year" LabelFormatter="{Binding StackedAreaXFormatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Population" LabelFormatter="{Binding StackedAreaYFormatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+            <!--垂直条形图-->
+            <lvc:CartesianChart Grid.Column="1" Background="LightGray" Series="{Binding BasicColumnSeriesCollection}">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Salesman" Labels="{Binding BasicColumnLabels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Sold Apps" LabelFormatter="{Binding BasicColumnFormatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+            <!--单条折线图-->
+            <lvc:CartesianChart Grid.Column="3" Series="{Binding SingleBasicLineSeriesCollection}">
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Sales" LabelFormatter="{Binding SingleBasicLineYFormatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Month" Labels="{Binding SingleBasicLineLabels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+
+            <GridSplitter Grid.Column="0" Width="2" Background="Black"></GridSplitter>
+            <GridSplitter Grid.Column="1" Width="2" Background="Black"></GridSplitter>
+            <GridSplitter Grid.Column="2" Width="2" Background="Black"></GridSplitter>
+            <GridSplitter Grid.Column="3" Width="2" Background="Black"></GridSplitter>
+        </Grid>
+
+
     </Grid>
 </Window>
