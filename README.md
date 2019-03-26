@@ -4,7 +4,7 @@
 
 ## 效果图如下
 ![avatar](https://github.com/HuaiAnGG/GraphicDataAnalysis/blob/master/GraphicDataAnalysis/Doc/UI.png)
-
+[效果图传送门(防失效)](https://github.com/HuaiAnGG/GraphicDataAnalysis/blob/master/GraphicDataAnalysis/Doc/UI.png)
 ## 已实现
 - 饼状图
 - 横列条形图
