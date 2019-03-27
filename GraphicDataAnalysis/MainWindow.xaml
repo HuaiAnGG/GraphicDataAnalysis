@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
                           
             <!--饼状图-->
-            <lvc:PieChart Background="LightGray" Grid.Column="0" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Loaded="PieChartLoad">
+            <lvc:PieChart Background="LightGray" Grid.Column="0" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Loaded="GraphChartLoad">
                 <lvc:PieChart.Series>
                     <lvc:PieSeries Title="Maria" Values="3" DataLabels="True"
                                LabelPoint="{Binding PointLabel}"/>
