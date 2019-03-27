@@ -82,6 +82,8 @@
                     <RowDefinition Height="100*"/>
                 </Grid.RowDefinitions>
                 
+                
+                
                 <!--多条折线图-->
                 <lvc:CartesianChart Grid.Row="1" Series="{Binding MultBasicLineSeriesCollection}" >
                     <lvc:CartesianChart.AxisY>
@@ -125,7 +127,7 @@
             </lvc:CartesianChart>
 
             <!--单条折线图-->
-            <lvc:CartesianChart Grid.Column="3" Series="{Binding SingleBasicLineSeriesCollection}">
+            <lvc:CartesianChart Background="LightGray" Grid.Column="3" Series="{Binding SingleBasicLineSeriesCollection}">
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="Sales" LabelFormatter="{Binding SingleBasicLineYFormatter}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>

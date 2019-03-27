@@ -47,6 +47,7 @@ namespace GraphicDataAnalysis
             InitStackedAreaLineChart();
             // 垂直条形图
             InitBasicColumnChart();
+
             // 单条折线图
             InitSingleBasicLineChart();
         }
